@@ -1,37 +1,46 @@
 package com.qa.springbootExample.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.qa.springbootExample.domain.User;
+import com.qa.springbootExample.repo.UserRepo;
 
 @Service
 public class UserService {
-
-	// Temporary storage, until we implement real database
-	private List<User> users = new ArrayList<>();
-
+	
+	private UserRepo repo;
+	
+	public UserService(UserRepo repo) {
+		this.repo = repo;
+	}
+	
+	// Create
 	public User create(User user) {
-		users.add(user);
-		return users.get(users.size() - 1);
+		return repo.saveAndFlush(user);
 	}
 
+	// Read all
 	public List<User> getAll() {
-		return this.users;
+		return repo.findAll();
 	}
 
+	// Read by id
 	public User getById(long id) {
-		return users.get((int) id);
+		return repo.findById(id).get();
 	}
 
+	// Update
 	public User update(long id, User user) {
-		users.remove((int) id);
-		users.add((int) id, user);
-		return users.get((int) id);
+		User existing = repo.findById(id).get();
+		existing.setFirstName(user.getFirstName());
+		existing.setLastName(user.getLastName());
+		existing.setUserName(user.getUserName());
+		return repo.saveAndFlush(existing);
 	}
 
-	public User delete(int id) {
-		return users.remove((int) id);
+	// Delete
+	public User delete(long id) {
+		return null;
 	}
 
 }
