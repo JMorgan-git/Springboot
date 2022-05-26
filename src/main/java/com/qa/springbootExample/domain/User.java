@@ -9,7 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="`user`")
 public class User {
 	
@@ -26,8 +33,9 @@ public class User {
 	@Column(nullable = false/*, unique = true*/) //could also set length=some length
 	private String userName; //username
 	
-	// Default constructor that spring uses
-	public User() {}
+// LOMBOK removes the need for the following commented out code with @noargsconstructor
+//	// Default constructor that spring uses
+//	public User() {}
 	
 	// This would be used for inserting into the database
 	public User(String firstName, String lastName, String userName) {
@@ -37,63 +45,64 @@ public class User {
 		this.userName = userName;
 	}
 
-	//This would be used for reading from the database
-	public User(long id, String firstName, String lastName, String userName) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.userName = userName;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(firstName, id, lastName, userName);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		return Objects.equals(firstName, other.firstName) && id == other.id && Objects.equals(lastName, other.lastName)
-				&& Objects.equals(userName, other.userName);
-	}
+// LOMBOK also removes the need for the following commented out code with @data
+//	//This would be used for reading from the database
+//	public User(long id, String firstName, String lastName, String userName) {
+//		super();
+//		this.id = id;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.userName = userName;
+//	}
+//
+//	public long getId() {
+//		return id;
+//	}
+//
+//	public void setId(long id) {
+//		this.id = id;
+//	}
+//
+//	public String getFirstName() {
+//		return firstName;
+//	}
+//
+//	public void setFirstName(String firstName) {
+//		this.firstName = firstName;
+//	}
+//
+//	public String getLastName() {
+//		return lastName;
+//	}
+//
+//	public void setLastName(String lastName) {
+//		this.lastName = lastName;
+//	}
+//
+//	public String getUserName() {
+//		return userName;
+//	}
+//
+//	public void setUserName(String userName) {
+//		this.userName = userName;
+//	}
+//
+//	@Override
+//	public int hashCode() {
+//		return Objects.hash(firstName, id, lastName, userName);
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		User other = (User) obj;
+//		return Objects.equals(firstName, other.firstName) && id == other.id && Objects.equals(lastName, other.lastName)
+//				&& Objects.equals(userName, other.userName);
+//	}
 
 }

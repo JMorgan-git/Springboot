@@ -28,9 +28,9 @@ public class UserService {
 
 	// Read by id
 	public User getById(long id) {
-		//return repo.findById(id).get();
+		return repo.findById(id).get();
 		//return repo.findById(id).orElseThrow(UserNotFoundException::new);
-		return repo.findById(id).orElseThrow(() -> new UserNotFoundExceptionWithID(id));
+		//return repo.findById(id).orElseThrow(() -> new UserNotFoundExceptionWithID(id));
 	}
 	
 	// Read by Name custom
